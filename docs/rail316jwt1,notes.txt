@@ -1,0 +1,138 @@
+
+https://medium.com/@goncalvesjoao/rails-devise-jwt-and-the-forgotten-warden-67cfcf8a0b73#.e47gbum1y
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Title:  .
+-----------------------2016-12-26[Dec-Mon]22-20PM
+
+how to sign_in?
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Title:  .
+-----------------------2016-12-27[Dec-Tue]10-35AM
+
+ref..
+https://github.com/jimjeffers/rails-devise-cors-jwt-example
+
+
+curl -H "Content-Type: application/json" \
+      -X POST \
+      -d '{"user": {"email":"test@example.com","password":"12345678"}}' \
+      http://localhost:3000/users/sign_in.json
+      
+      
+curl -H "Content-Type: application/json" \
+      -X POST \
+      -d '{"user": {"email":"a","password":"a"}}' \
+      http://localhost:3001/users/sign_in.json
+      
+      
+           
+Started POST "/users/sign_in.json" for 192.168.88.94 at 2016-12-27 10:33:10 -0500
+Cannot render console from 192.168.88.94! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by Devise::SessionsController#create as JSON
+  Parameters: {"email"=>"a", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+Completed 422 Unprocessable Entity in 1ms (ActiveRecord: 0.0ms)
+
+
+
+_____________ 
+
+
+
+  # protect_from_forgery with: :exception
+  protect_from_forgery with: :null_session
+
+
+
+curl -H "Content-Type: application/json" \
+      -X POST \
+      -d '{"user": {"email":"a","password":"a"}}' \
+      http://v206x2016103022:3001/users/sign_in.json
+      
+     
+     
+Started POST "/users/sign_in.json" for 192.168.88.94 at 2016-12-27 10:43:35 -0500
+Cannot render console from 192.168.88.94! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by Devise::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"a", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"a", "password"=>"[FILTERED]"}}}
+Can't verify CSRF token authenticity
+  User Load (1.4ms)  SELECT  "users".* FROM "users" WHERE "users"."email" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["email", "a"]]
+   (0.1ms)  begin transaction
+  Role Load (0.2ms)  SELECT  "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT 1  [["id", 18]]
+  SQL (2.8ms)  UPDATE "users" SET "last_sign_in_at" = ?, "current_sign_in_at" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = ?  [["last_sign_in_at", "2016-12-27 03:28:06.949449"], ["current_sign_in_at", "2016-12-27 15:43:36.140249"], ["sign_in_count", 3], ["updated_at", "2016-12-27 15:43:36.201443"], ["id", 2]]
+   (4.9ms)  commit transaction
+Completed 406 Not Acceptable in 310ms (ActiveRecord: 14.9ms)
+
+ActionController::UnknownFormat (ActionController::UnknownFormat):
+  responders (2.3.0) lib/action_controller/respond_with.rb:207:in `respond_with'
+  devise (4.2.0) app/controllers/devise/sessions_controller.rb:21:in `create'
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Title:  .
+-----------------------2016-12-27[Dec-Tue]11-26AM
+
+sign_in worked..
+
+
+David@redwe MINGW64 /c/var/share203/rail316jwt1 (master)
+$ curl -H "Content-Type: application/json"       -X POST       -d '{"user": {"email":"a","password":"a"}}'       http://v206x2016103022:3001/users/sign_in.json
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   166  100   128  100    38    149     44 --:--:-- --:--:-- --:--:--   149{"id":2,"email":"a","created_at":"2016-12-27T02:19:34.147Z","updated_at":"2016-12-27T16:20:09.568Z","name":"admin","role_id":18}
+
+David@redwe MINGW64 /c/var/share203/rail316jwt1 (master)
+$
+
+_____________ 
+
+
+
+
+-i = display headers
+
+-D ./filename = headers to file
+
+David@redwe MINGW64 /c/var/share203/rail316jwt1 (master)
+
+$ curl -H "Content-Type: application/json" -X POST -d '{"user": {"email":"a","password":"a"}}'  http://v206x2016103022:3001/users/sign_in.json -D ./curldump -i
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   166  100   128  100    38    292     86 --:--:-- --:--:-- --:--:--   292HTTP/1.1 201 Created
+X-Frame-Options: SAMEORIGIN
+X-Xss-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Location: http://v206x2016103022:3001/
+Content-Type: application/json; charset=utf-8
+Etag: W/"6399e05c6cf8c07415d820b9cbb931a0"
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: 25cea80f-6649-4ad3-9c19-0384ee075691
+X-Runtime: 0.346596
+Server: WEBrick/1.3.1 (Ruby/2.3.0/2015-12-25)
+Date: Tue, 27 Dec 2016 16:38:09 GMT
+Content-Length: 128
+Connection: Keep-Alive
+Set-Cookie: _jwt1_session=TUYxUlI1cDdVMVZBMXpUUXRWRU8vS0xuRTNPOWZMY1AzUG1oV2RoK1V0MjBqVS9lMTMrU0poTkt1RU5oNGRTMzFGTWpQRWhjS0pVemdreG5UMWthYXJMN1g0QlptWmFZMnM3RmJib2tFdE5FdEYrL2p5V0xZM05TUmZNR2lDNFhYa1FZYWRwWHcvL095YlJHaTczZW53PT0tLUQvNmhMQXM1dFpvbXJiSktPZGlJSFE9PQ%3D%3D--3e4916d33fc5e9bf14177c5441e133c2d57dd7bd; path=/; HttpOnly
+
+{"id":2,"email":"a","created_at":"2016-12-27T02:19:34.147Z","updated_at":"2016-12-27T16:38:09.807Z","name":"admin","role_id":18}
+
+David@redwe MINGW64 /c/var/share203/rail316jwt1 (master)
+$
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+

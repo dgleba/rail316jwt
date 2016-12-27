@@ -1,0 +1,16 @@
+HTTP/1.1 201 Created 
+X-Frame-Options: SAMEORIGIN
+X-Xss-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Location: http://v206x2016103022:3001/
+Content-Type: application/json; charset=utf-8
+Etag: W/"e66385a128fdabf11bc570692dbb710c"
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: 4ca0e01d-7d9e-4787-8dc1-fc8cdaa070df
+X-Runtime: 0.439285
+Server: WEBrick/1.3.1 (Ruby/2.3.0/2015-12-25)
+Date: Tue, 27 Dec 2016 16:44:14 GMT
+Content-Length: 128
+Connection: Keep-Alive
+Set-Cookie: _jwt1_session=ZmN1VEZwYTErYUlSMHhJcDhYeDRQRWlEUG0xYkJNK0hPem85N3N1aEN3YmZYWmZDeTVRanJoR2k1bnk3b1kxMnk0c05XMzFvSGlvN0t2UkRZTktPMTU2RllZcURYeXRUU2ZWYjFjU2FIQ0pNUTVxNEUzK29EVE5hRlRWWkk4MysycXNvcFJrVWMyTUlPUFgwaXlEYVZ3PT0tLWwyVFhGVjhWVXFTQVF5SDAvRDkrSUE9PQ%3D%3D--2707d99f4c38a3f61ebcbd53ecb54151bd483aad; path=/; HttpOnly
+

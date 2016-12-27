@@ -1,0 +1,126 @@
+
+https://medium.com/@goncalvesjoao/rails-devise-jwt-and-the-forgotten-warden-67cfcf8a0b73#.e47gbum1y
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Title:  .
+-----------------------2016-12-26[Dec-Mon]21-20PM
+
+
+HomepageSign in / Sign up
+
+Next story
+Account activation and password reset using Devise.
+26
+6
+Go to the profile of João Gonçalves
+Never miss a story from João Gonçalves, when you sign up for Medium. Learn more
+GET UPDATES
+Go to the profile of João Gonçalves
+João GonçalvesFollow
+Apr 15
+Rails, Devise, JWT and the forgotten Warden
+Long story short: Most of the examples that we found under the Rails devise jwt examples google search do not make full use of devise’s capabilities.
+Using a custom before_action under the ApiController to verify if the request contains a valid JWT token and ignoring the already existing before_action :authenticate_user! is not the best “devise example”.
+
+not cool
+It will render all of Devise’s helpers like current_user, user_signed_in? useless and is actually ignoring all the work that the authors’ had to make Devise into a:
+“Flexible authentication solution for Rails with Warden” devise gemspec description
+So, what is Warden, you ask.
+Warden is a ruby gem that does the actual authentication through an array of strategies; when the first strategy fails to authenticate the user, it uses the next and so forth.
+Devise adds several strategies to Warden, according to your User Model configuration (if it is rememberable, database_authenticatable, etc.) and delegates the real authentication process to Warden, if one of the strategies (user cookie session, user password credentials, etc.) turns out ok, Devise will trust Warden’s judgment and behave accordingly.
+Cool, lets build our own JWT Strategy and add it to Warden’s list
+With this new strategy added to the top of the list, if you make a request with a JWT token in the HTTP Authorization Header that strategy will kick in and Warden will tell Devise that the user is logged in, just like when you make a request with a cookie session.
+Adding a new way to authenticate your user should not require you to change your app, this authentication middleware (JWT strategy) will allow your app to trust Devise like it should, before_action :authenticate_user! will enforce both your JWT authentication and your User Model configuration, current_user will return the authenticated user, user_signed_in? will correctly return true or false and all of the other helpers will behave like they should.
+So without further ado…
+Changes you need to make in order to make Devise use JWT Header Authentication
+
+Cool, hope it helps anyone.
+RailsDeviseJwt
+26
+6
+Follow
+Go to the profile of João Gonçalves
+João Gonçalves
+More from João Gonçalves
+Rails special route for single page applications
+Go to the profile of João Gonçalves
+João Gonçalves
+5
+
+Also tagged Devise
+An ever learning programer’s steps to using Devise, OmniAuth and ActiveRecord in a ‘Rails Project’
+It’s been a couple of week since my last post, but I have returned with a new project to talk about. I am on my 10th week with Flatiron’s…
+Go to the profile of Luke Ghenco
+Luke Ghenco
+1
+
+Related reads
+Handling Offline Actions in React Native
+Go to the profile of Spencer Carli
+Spencer Carli
+49
+
+Responses
+Write a response…
+Recommended by João Gonçalves (author)
+Go to the profile of Nikolay Petkov
+Nikolay Petkov
+Dec 6
+This is indeed the most acceptable solution for integrating JWT and devise I’ve found so far, very nice read!
+Regarding Rob’s comments, I’d like to share my own limited experience with JWT authentication. For a past project, we decided to delegate the whole user management to a third party identity provider, what left us…
+Read more…
+1
+1 response
+Recommended by João Gonçalves (author)
+Go to the profile of Piyush Sonagara
+Piyush Sonagara
+Dec 20
+The most elegant solution indeed. Thanks for this article.
+1
+
+Conversation between João Gonçalves and Rob Yedlin.
+Go to the profile of Rob Yedlin
+Rob Yedlin
+Nov 2
+What would you do to log the user out using JWT and Devise?
+
+1 response
+Go to the profile of João Gonçalves
+João Gonçalves
+Nov 2
+Hi Rob, good question, that in itself will lead to another article.
+So we have 3 ways to do it: 1) with a blacklist, 2) with a whitelist both approaches are not ideal, since they would require a database call for each token validation, or 3) we do use a token refresh! :D here are some links that might help:
+Read more…
+
+1 response
+Go to the profile of Rob Yedlin
+Rob Yedlin
+Nov 2
+Ok, so if I understand correctly, a more fully featured JWT approach to authentication using Warden while having Devise do the heavy lifting inside the rails app would look like this:
+1. User can log in to the rails app and get a JWT. DONE.
+2. Authentication would expire at the expiration time given. DONE.
+3. A refresh token can be given to the user during certain request intervals, to keep the auth alive. If no request is sent within the interval and the token expires, they would have to login again. TODO
+4. A token could be set to never expire, but a logged in user could theoretically invalidate all of their JWTs except the one they are using, (similar to how Netflix lets you sign out of all other devices that your ex-boyfriends/girlfriends are still using. :) With the current setup, if the user changes the password, Devise will log out any user using the session cookie strategy, but not users using the JWT. Logging out all other users using any strategy would be an interesting feature for Devise, but probably really hard to implement. TODO
+Does this look right?
+
+1 response
+Go to the profile of João Gonçalves
+João Gonçalves
+Nov 3
+Yes, almost that.
+So in 3) the user should be able to request a new token indefinitely (through the refresh token) even if his current JWT token expires.
+4) If a JWT token no expiration date then devise won’t ever be able to refuse any token, unless you have some type of black list tokens stored in…
+Read more…
+
+1 response
+Go to the profile of Rob Yedlin
+Rob Yedlin
+Nov 3
+Got it. Thanks!
+So, based on your tutorial, you just check the token payload for the expiration time in the client, and when it’s time to refresh the token, you just request a new token and set it.
+No new functionality needs to be created server side, then. It’s all in the client.
+Right?
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
