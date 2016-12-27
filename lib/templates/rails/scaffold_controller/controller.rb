@@ -6,6 +6,9 @@ require_dependency "<%= namespaced_path %>/application_controller"
 class <%= controller_class_name %>Controller < ApplicationController
   before_action :set_<%= singular_table_name %>, only: [:show, :edit, :update, :destroy]
 
+  #cancancan
+  load_and_authorize_resource
+
   # GET <%= route_url %>
   def index
     # @<%= plural_table_name %> = <%= orm_class.all(class_name) %>
