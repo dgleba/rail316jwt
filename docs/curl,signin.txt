@@ -3,3 +3,30 @@ curl -H "Content-Type: application/json" \
       -d '{"user": {"email":"a","password":"a"}}' \
       http://v206x2016103022:3001/users/sign_in.json
       
+      
+curl -H "Content-Type: application/json" \
+      -X POST -D ./curldump -i\
+      -d '{"user": {"email":"a","password":"a"}}' \
+      http://localhost:3001/users/sign_in.json
+            
+
+            
+no...
+      
+curl -H "Content-Type: application/json" \
+      -X POST -D ./curldump -i\
+      -d '{"user": {"email":"dgleba@gmail.com","password":"1234","password_confirmation":"1234"}}' \
+      http://localhost:3001/users/sign_up.json
+             
+     
+curl -H "Content-Type: application/json" \
+      -X POST -D ./curldump -i\
+      -d '{"user": {"email":"dgleba@gmail.com","password":"1234","password_confirmation":"1234"}}' \
+      http://localhost:3001/users.json
+             
+ 
+curl -H "Content-Type: application/json" \
+      -X POST -D ./curldump -i\
+      -d '{"user": {"email":"dgleba@gmail.com","password":"1234"}}' \
+      http://localhost:3001/users/sign_in.json
+   

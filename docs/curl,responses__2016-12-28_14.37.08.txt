@@ -1,0 +1,60 @@
+2016-12-28_Wed_14.36-PM
+
+no token returned....
+
+
+
+albe@v206x20161030220807:~/share203$        
+albe@v206x20161030220807:~/share203$ curl -H "Content-Type: application/json" \
+>       -X POST -D ./curldump -i\
+>       -d '{"user": {"email":"dgleba@gmail.com","password":"1234","password_confirmation":"1234"}}' \
+>       http://localhost:3001/users.json
+
+
+HTTP/1.1 201 Created 
+X-Frame-Options: SAMEORIGIN
+X-Xss-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Location: http://localhost:3001/
+Content-Type: application/json; charset=utf-8
+Etag: W/"0b60f8acca66601ee1b520d44f2da780"
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: 39406957-cf7b-4717-ab07-0074b16c7e8b
+X-Runtime: 0.458224
+Server: WEBrick/1.3.1 (Ruby/2.3.0/2015-12-25)
+Date: Wed, 28 Dec 2016 19:33:00 GMT
+Content-Length: 139
+Connection: Keep-Alive
+Set-Cookie: _jwt1_session=SEs1RHRmODAwdXRtYWJNM2VPVDU2K3hoYktMKzNmUW1OT3FWQnExWVhiZnUwUW1tcWVqVlhDTTJCWEQvWURQVTIralYwc2o2SlRXYmJ0ZWpWM1dtVzltVUtNSmVSYmI5aUpBRlBFc2JrdkFXalpNdWFJbDZSVVByaFpBQ3BmV0twMmdORTdxRTFhVEg4NTBmTjJQT21nPT0tLUZjVnAxdnFSMzNiTnNTQ09qbStmYUE9PQ%3D%3D--996a766aa30701c6e7d0c5d0e16a24b13af1e950; path=/; HttpOnly
+
+{"id":4,"email":"dgleba@gmail.com","created_at":"2016-12-28T19:33:00.319Z","updated_at":"2016-12-28T19:33:00.329Z","name":null,"role_id":1}
+
+
+
+albe@v206x20161030220807:~/share203$  
+albe@v206x20161030220807:~/share203$ curl -H "Content-Type: application/json" \
+>       -X POST -D ./curldump -i\
+>       -d '{"user": {"email":"dgleba@gmail.com","password":"1234"}}' \
+>       http://localhost:3001/users/sign_in.json
+
+HTTP/1.1 201 Created 
+X-Frame-Options: SAMEORIGIN
+X-Xss-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Location: http://localhost:3001/
+Content-Type: application/json; charset=utf-8
+Etag: W/"8ab89dd792266ee3f111bc505ff4fa97"
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: f7fffe94-b6cb-4faf-bf88-e5cbbd03798e
+X-Runtime: 0.474234
+Server: WEBrick/1.3.1 (Ruby/2.3.0/2015-12-25)
+Date: Wed, 28 Dec 2016 19:34:00 GMT
+Content-Length: 139
+Connection: Keep-Alive
+Set-Cookie: _jwt1_session=VU5lU1dWUjlSbm4xcEYxb085cVFtdlFjakYvZk9kWUcrRXRWWDhxQU5hUmRKRG42cVFXdEo1SVZndXc4UU0vVitQYVg2QkxTQ1dxRUNLck9vMGNNZitXWlA1c25BMGdoL2Zod0h5aWk5WmlKZ1BYUmw2R3VvQ0prenFXd1E5bEZJSmV2ckRZY2NncURCRWhpMnRUcTRnPT0tLU5uaGRPcytzd0trR2Ewdm1pLzlPK3c9PQ%3D%3D--47a03a1d4589e59b22a2484bcd7e84092e119352; path=/; HttpOnly
+
+{"id":4,"email":"dgleba@gmail.com","created_at":"2016-12-28T19:33:00.319Z","updated_at":"2016-12-28T19:34:00.435Z","name":null,"role_id":1}
+
+albe@v206x20161030220807:~/share203$    
+albe@v206x20161030220807:~/share203$ 
+
