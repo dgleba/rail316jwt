@@ -1,0 +1,16 @@
+Started POST "/users/sign_in" for 192.168.88.94 at 2016-12-27 18:02:53 -0500
+Cannot render console from 192.168.88.94! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by Devise::SessionsController#create as HTML
+
+  Parameters: {"utf8"=>"?", "authenticity_token"=>"UIonEmpj0HgHVb8WSRqFmZMD9GPbnBnQeyAu/4FuM5U1t9YZ1MdvQgUEcxdNIdTfSpORkNnrKlSbjnoJVloDXQ==", "user"=>{"email"=>"a", 
+  
+  "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  User Load (2.5ms)  SELECT  "users".* FROM "users" WHERE "users"."email" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["email", "a"]]
+   (0.1ms)  begin transaction
+  Role Load (0.4ms)  SELECT  "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT 1  [["id", 18]]
+  SQL (3.7ms)  UPDATE "users" SET "last_sign_in_at" = ?, "current_sign_in_at" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = ?  [["last_sign_in_at", "2016-12-27 16:44:14.167352"], ["current_sign_in_at", "2016-12-27 23:02:54.369294"], ["sign_in_count", 11], ["updated_at", "2016-12-27 23:02:54.495816"], ["id", 2]]
+   (12.8ms)  commit transaction
+Redirected to http://v206x2016103022:3001/
+Completed 302 Found in 624ms (ActiveRecord: 21.2ms)
+
+
