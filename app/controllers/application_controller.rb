@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
   protect_from_forgery with: :null_session
   # protect_from_forgery with: :null_session, :if => Proc.new { |c| c.request.format == 'application/json' }
-  skip_before_filter :verify_authenticity_token
+  # this in users/controllers.. skip_before_filter :verify_authenticity_token
  
   rescue_from CanCan::AccessDenied do |exception|
     # redirect_to :back, alert: exception.message

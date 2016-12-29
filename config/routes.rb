@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   resources :pfeatures
   resources :products
   resources :roles
-  devise_for :users
- root "home#index"
+  
+  #devise_for :users
+  devise_for :users, controllers: { sessions: 'users/sessions' }
+
+  root "home#index"
 
 
   get 'home/index'

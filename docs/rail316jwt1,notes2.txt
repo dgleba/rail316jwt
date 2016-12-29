@@ -1,0 +1,54 @@
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Title:  .
+-----------------------2016-12-28[Dec-Wed]15-20PM
+
+2016-12-28_Wed_15.20-PM before rails generate devise:controllers users 
+
+
+noworky... rails generate devise:controllers devise
+
+
+routes..
+
+devise_for :users, controllers: { sessions: 'users/sessions' }
+
+noworky.. devise_for :users, controllers: { sessions: 'devise/sessions' }
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Title:  .
+-----------------------2016-12-28[Dec-Wed]16-43PM
+
+http://stackoverflow.com/questions/32059117/making-devise-respond-to-both-html-and-json
+
+respond_to do |format|
+      format.html {
+        super
+      }
+      format.json {
+        @user = User.create(user_params)
+        @user.save ? (render :json => {:state => {:code => 0}, :data => @user }) : 
+                     (render :json => {:state => {:code => 1, :messages => @user.errors.full_messages} })
+      }
+    end
+  end
+
+_____________ 
+
+
+http://www.justinweiss.com/articles/respond-to-without-all-the-pain/
+
+  
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Title:  .
+-----------------------2016-12-28[Dec-Wed]22-40PM
+
+/home/albe/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/controllers/devise/sessions_controller.rb
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
