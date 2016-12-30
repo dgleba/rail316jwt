@@ -1,7 +1,21 @@
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Title:  .
+-----------------------2016-12-29[Dec-Thu]18-18PM
+
+primarily..
+
+
+https://medium.com/@goncalvesjoao/rails-devise-jwt-and-the-forgotten-warden-67cfcf8a0b73#.pbl1obgxs
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Title:  .
 -----------------------2016-12-27[Dec-Tue]11-11AM
 
+for devise controllers..
 
 https://github.com/jimjeffers/rails-devise-cors-jwt-example
 
@@ -18,7 +32,8 @@ less so..
 
 
 David@redwe MINGW64 /c/var/share203/rail316jwt1
-$ git clone https://github.com/RohitRox/Rails-API-and-JWT.git
+$ 
+git clone https://github.com/RohitRox/Rails-API-and-JWT.git
 Cloning into 'Rails-API-and-JWT'...
 remote: Counting objects: 464, done.
 remote: Compressing objects: 100% (176/176), done.
@@ -31,7 +46,6 @@ warning: .mtimes not found
 
 David@redwe MINGW64 /c/var/share203/rail316jwt1
 $
-
 
 
 
